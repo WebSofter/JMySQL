@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  *
  * @author WebSofter
  */
-public class MySQL {
+public class JMySQL {
     Connection connection;
     Statement statement;
 	/** Connect to the DB on server*/

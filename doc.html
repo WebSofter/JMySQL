@@ -15,7 +15,122 @@
     </head>
     <body>
         <div>
-		
+			Очень часто приходится работать с БД и выполнять однотипные длинные операции по добавлению, удалению и обновлению данных из БД MySQL на Java. Вместо того, чтобы каждый раз набирать команды и в целях уменьшения количества кода можно воспользоваться готовым классом от WebSofter. Последнюю версию класса можно скачать с репозитория <a href="https://github.com/WebSofter/JMySQL" target="_blank">GitHub</a>.
+			<h3 style="text-align: center;">Пример использования</h3>
+			<pre>
+			<code>
+			//Поля данных для соединения с БД
+					public String driver = "com.mysql.jdbc.Driver";
+					public String server = "localhost:3306";
+					public String db = "myDbName";
+					public String user = "root";
+					public String password = "123456";
+			//Создаем объект класса
+			public JMySQL db = new JMySQL();
+			//Соединяемся с БД
+			String status = db.connect(driver, server, db, user, password);
+			//Добавляем что-нибудь в БД
+			String result = db.insert("user",
+									new String[]{"login", "password", "email", "phone", "name", "surname"},
+									new String[]{"MyLogin", "123456", "mail@mail.com",  "8800 888 88 88", "David", "Amirkhanov"});
+			</code>
+			</pre>
+			<h3 style="text-align: center;">Описание методов</h3>
+			Текущая версия поддерживает 8 методов для работы с БД MySQL и дает возможность быстро и легко реализовать CRUD - структуру работы с БД из Java - кода.
+			<ul>
+				<li><a href="#1">String connect(...)</a> - соединяет с БД;</li>
+				<li><a href="#2">String insert(...)</a> - добавляет новые данные в таблице текущего подключения;</li>
+				<li><a href="#3">boolean update(...)</a> - обновляет данные в таблице текущего подключения;</li>
+				<li><a href="#4">ResultSet read(...)</a> - читает данные из таблицы текущего подключения;</li>
+				<li><a href="#5">boolean delete(...)</a> - удаляет данные в таблице текущего подключения;</li>
+				<li><a href="#6">boolean contains(...)</a> - проверяет значение на наличие по порядковому номеру столбца в таблице текущего подключения;</li>
+				<li><a href="#7">boolean contains(...)</a>- проверяет значение на наличие по названию столбца в таблице текущего подключения;</li>
+				<li><a href="#8">void close(...)</a> - закрывает соединение текущего подключения.</li>
+			</ul>
+			<h4 id="1" style="text-align: center;">String connect(...)</h4>
+			Метод соединяет с БД и возвращает "ok" при удачном подключении или ошибку - при неудачном.
+			<pre><code>
+			public String connect(String driver,String server,String db,String user, String password)
+			</code>
+			</pre>
+			<ul>
+				<li><span style="color: #339966;">driver</span> - драйвер БД. Для MySQL это значение равно <em>"com.mysql.jdbc.Driver"</em>;</li>
+				<li><span style="color: #339966;">server</span> - адрес сервера;</li>
+				<li><span style="color: #339966;">user</span> - пользователь БД;</li>
+				<li><span style="color: #339966;">password</span> - пароль пользователя.</li>
+			</ul>
+			<h4 id="2" style="text-align: center;">String insert(...)</h4>
+			Метод метод добавляет новые данные в текущую БД и возвращает "ok" при удачном добавлении или ошибку - при неудачном.
+			<pre><code>
+			 public String insert(String tableName,String[] colNames,String[] colValues)
+			</code>
+			</pre>
+			<ul>
+				<li><span style="color: #339966;">tableName</span> - название таблицы;</li>
+				<li><span style="color: #339966;">colNames</span> - массив названий колонок, в которую добавляются данные;</li>
+				<li><span style="color: #339966;">colValues</span> - массив значений для соответствующих добавляемых колонок;</li>
+			</ul>
+			<h4 id="3" style="text-align: center;">boolean update(...)</h4>
+			Метод обновляет данные в таблице в определенных колонках через SQL - запросы
+			<pre><code>
+			 public boolean update(String tableName,String[] colNames,String[] colValues,String where)
+			</code>
+			</pre>
+			<ul>
+				<li><span style="color: #339966;">tableName</span> - название таблицы;</li>
+				<li><span style="color: #339966;">colNames</span> - массив названий колонок, в которых обновляются данные;</li>
+				<li><span style="color: #339966;">colValues</span> - массив значений для соответствующих обновляемых колонок;</li>
+				<li><span style="color: #339966;">where</span> - SQL - запрос(без ключевого слова WHERE). Если запроса нет, то записываем пустую строку "";</li>
+			</ul>
+			<h4 id="4" style="text-align: center;">ResultSet read(...)</h4>
+			Метод читает данные из выбранной таблицы через SQL - запросы SELECT и WHERE. При удачном чтении возвращает массив данных в виде объекта ResultSet
+			<pre><code>
+			 public ResultSet read(String select,String tableName,String where)
+			</code>
+			</pre>
+			<ul>
+				<li><span style="color: #339966;">select</span> - SQL - запрос(значение пишется без SELECT и это значение, чаще всего, равно "*");</li>
+				<li><span style="color: #339966;">tableName</span> - название читаемой таблицы;</li>
+				<li><span style="color: #339966;">where</span> - SQL - запрос(без ключевого слова WHERE). Если запроса нет, то записываем пустую строку "";</li>
+			</ul>
+			<h4 id="5" style="text-align: center;">boolean delete(...)</h4>
+			Удаляет данные из выбранной таблицы через SQL - запрос WHERE. Возвращает true при удачном выполнении и false - при неудачном
+			<pre><code>
+			public boolean delete(String tableName, String where)
+			</code>
+			</pre>
+			<ul>
+				<li><span style="color: #339966;">tableName</span> - название таблицы</li>
+				<li><span style="color: #339966;">where</span>- SQL - запрос(без ключевого слова WHERE). Если запроса нет, то записываем пустую строку "";</li>
+			</ul>
+			<h4 id="6" style="text-align: center;">boolean contains(...)</h4>
+			Проверяет значение на содержание его в определенной колонке таблицы через порядковый номер колонки. Возвращает true при нахождении и false - в противном случае
+			<pre><code>
+			public boolean contains(String tableName,int colNumber, String eqValue)
+			</code>
+			</pre>
+			<ul>
+				<li><span style="color: #339966;">tableName</span> - название таблицы</li>
+				<li><span style="color: #339966;">colNumber</span>- порядковый номер колонки;</li>
+				<li><span style="color: #339966;">eqValue</span>- проверяемое значение;</li>
+			</ul>
+			<h4 id="7" style="text-align: center;">boolean contains(...)</h4>
+			Проверяет значение на содержание его в определенной колонке таблицы через название колонки. Возвращает true при нахождении и false - в противном случае
+			<pre><code>
+			public boolean contains(String tableName,int colName, String eqValue)
+			</code>
+			</pre>
+			<ul>
+				<li><span style="color: #339966;">tableName</span> - название таблицы</li>
+				<li><span style="color: #339966;">colNumber</span>- название колонки;</li>
+				<li><span style="color: #339966;">eqValue</span>- проверяемое значение;</li>
+			</ul>
+			<h4 id="8" style="text-align: center;">void close(...)</h4>
+			Закрывает текущее соединение с БД. Ничего не возвращает и не принимает
+			<pre><code>
+			public void close()
+			</code>
+			</pre>
         </div>
     </body>
 </html>

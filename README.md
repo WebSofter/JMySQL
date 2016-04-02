@@ -1,7 +1,7 @@
 # JMySQL
 Ready and free Java class for the CRUD - operations with MySQL database
 
-Designe by WebSofter(David Amirkhanov)<br/>
+Designed by WebSofter(David Amirkhanov)<br/>
 Site: www.websofter.ru<br/>
 Email: mail.websofter@gmail.com<br/>
 

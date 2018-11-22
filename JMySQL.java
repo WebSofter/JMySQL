@@ -35,7 +35,7 @@ public class JMySQL {
 			this.connection = (Connection) DriverManager.getConnection(url, username, psword);//Getting connection
                         
 			System.out.println("is connect to DB" + this.connection);
-                        status = "ok";
+                        status = "ok";//Successfully connection
 		} // end try
 		catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -156,8 +156,6 @@ public boolean delete(String tableName,String where)
     {
 
       try {
-
-            
             String query = "DELETE FROM "+tableName+" WHERE "+where+"";
             System.out.println(query);
             Statement stmt = (Statement) this.connection.createStatement();

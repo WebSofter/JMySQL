@@ -2,7 +2,7 @@
 Ready and free Java class for the CRUD - operations with MySQL database
 
 Designed by WebSofter(David Amirkhanov)<br/>
-Site: www.websofter.ru<br/>
+Site: wsofter.com<br/>
 Email: mail.websofter@gmail.com<br/>
 
 String connect (...) - connects to the database;<br/>
@@ -16,7 +16,7 @@ void close (...) - closes the connection to the current connection.<br/>
 
 #Simple example
 
-БД public String driver = "com.mysql.jdbc.Driver"; <br/>
+public String driver = "com.mysql.jdbc.Driver"; <br/>
 public String server = "localhost:3306"; <br/>
 public String db = "myDbName"; <br/>
 public String user = "root"; <br/>
